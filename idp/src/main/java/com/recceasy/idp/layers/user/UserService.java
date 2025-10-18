@@ -87,7 +87,7 @@ public class UserService {
         user.setEnabled(false);
 
 
-        emailService.sendOTPEmail();
+//        emailService.sendOTPEmail();
 
         return user;
     }

@@ -3,20 +3,17 @@ package com.recceasy.idp.layers.authentication;
 import com.recceasy.idp.dto.auth.LoginRequest;
 import com.recceasy.idp.dto.auth.LoginResponse;
 import com.recceasy.idp.dto.user.CreateUser;
-import com.recceasy.idp.dto.user.UserRole;
-import com.recceasy.idp.handlers.ExceptionHandlers.UserExistingException;
 import com.recceasy.idp.layers.password.Password;
 import com.recceasy.idp.layers.password.PasswordRepository;
 import com.recceasy.idp.layers.user.User;
 import com.recceasy.idp.layers.user.UserRepository;
 import com.recceasy.idp.layers.user.UserService;
-import jakarta.mail.MessagingException;
+import com.recceasy.idp.service.KeycloakAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,9 +35,12 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private KeycloakAdminService keycloakAdminService;
+
     @PostMapping("/register")
-    public User register(@RequestBody CreateUser createUser) throws UserExistingException, MessagingException, UnsupportedEncodingException {
-        return userService.register(new User(createUser.getUsername(), UserRole.SUPER_USER), createUser.getPassword());
+    public User register(@RequestBody CreateUser createUser) throws Exception {
+        return keycloakAdminService.createUser(createUser);
     }
 
     @PostMapping("/login")
