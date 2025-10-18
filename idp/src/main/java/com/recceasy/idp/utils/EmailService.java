@@ -34,25 +34,13 @@ public class EmailService {
     }
 
     @Async
-    public void sendVerificationEmail(String link, String recipient) throws UnsupportedEncodingException, jakarta.mail.MessagingException {
+    public void sendVerificationEmail(String recipient, String token) throws UnsupportedEncodingException, jakarta.mail.MessagingException {
         String subject = "Welcome to Recceasy.";
+        // TODO : CHANGE TO DYNAMIC URL
+        String verificationUrl = "http://localhost:8073/health/verify?token=" + token;
         String content = format("We are happy to have you with us. " +
                 "Please verify your email address by clicking on the link below. " +
-                "\n\n <a href=\"%s\">%s</a>", link, link);
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom(fromEmailAddress, "Applaud Innovations");
-        helper.setTo(recipient);
-        helper.setSubject(subject);
-        helper.setText(content, true);
-        mailSender.send(message);
-    }
-
-
-    @Async
-    public void sendOTPEmail(String code, String recipient) throws UnsupportedEncodingException, jakarta.mail.MessagingException {
-        String subject = "Password Reset Requested";
-        String content = format("Please use the code to reset your password {%s}", code);
+                "\n\n <a href=\"%s\">%s</a>", verificationUrl, verificationUrl);
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setFrom(fromEmailAddress, "Applaud Innovations");
