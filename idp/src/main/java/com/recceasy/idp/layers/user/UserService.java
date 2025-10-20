@@ -6,7 +6,6 @@ import com.recceasy.idp.handlers.ExceptionHandlers.TokenExpiredException;
 import com.recceasy.idp.handlers.ExceptionHandlers.UserExistingException;
 import com.recceasy.idp.layers.password.PasswordService;
 import com.recceasy.idp.layers.password.PasswordValidator;
-import com.recceasy.idp.layers.user.UsernameValidator;
 import com.recceasy.idp.layers.userVerification.UserVerificationLinkBuilder;
 import com.recceasy.idp.layers.userVerification.UserVerificationService;
 import com.recceasy.idp.utils.EmailService;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
@@ -51,11 +49,7 @@ public class UserService {
         User createdUser = userRepository.save(newUser);
         passwordService.create(createdUser.getId(), password);
 
-        this.emailService.sendVerificationEmail(
-                new UserVerificationLinkBuilder()
-                        .withToken(userVerificationService.create(createdUser.getUsername())
-                        ).withUsername(newUser.getUsername()).build()
-        , newUser.getUsername());
+        this.emailService.sendVerificationEmail(new UserVerificationLinkBuilder().withToken(userVerificationService.create(createdUser.getUsername())).withUsername(newUser.getUsername()).build(), newUser.getUsername());
 
         return createdUser;
     }

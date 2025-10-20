@@ -31,7 +31,10 @@ public class SessionService {
 
     @Transactional
     public void revoke(String token) {
-        repository.findByToken(token).ifPresent(t -> { t.setRevoked(true); repository.save(t); });
+        repository.findByToken(token).ifPresent(t -> {
+            t.setRevoked(true);
+            repository.save(t);
+        });
     }
 
     private String randomToken() {

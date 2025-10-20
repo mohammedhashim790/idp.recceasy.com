@@ -5,10 +5,7 @@ import com.recceasy.idp.handlers.ExceptionHandlers.username.InvalidEmailExceptio
 import java.util.regex.Pattern;
 
 public class UsernameValidator {
-    private static final Pattern EMAIL_PATTERN = Pattern.compile(
-            "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$",
-            Pattern.CASE_INSENSITIVE
-    );
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$", Pattern.CASE_INSENSITIVE);
 
     public static void validateOrThrow(String username) {
         if (username == null || username.isBlank()) {
