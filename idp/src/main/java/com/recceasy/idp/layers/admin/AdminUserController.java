@@ -40,7 +40,7 @@ public class AdminUserController {
     @PutMapping("/{id}/force-reset")
     public ResponseEntity<?> forceReset(@PathVariable("id") String id) {
         adminUserService.forceReset(id);
-        return ResponseEntity.ok(Map.of("status","RESET_REQUIRED"));
+        return ResponseEntity.ok(Map.of("status", "RESET_REQUIRED"));
     }
 
     @DeleteMapping("/{id}")

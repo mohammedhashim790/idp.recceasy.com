@@ -3,14 +3,14 @@ package com.recceasy.idp.config;
 import com.recceasy.idp.layers.authentication.JwtService;
 import com.recceasy.idp.layers.authentication.SessionService;
 import com.recceasy.idp.layers.security.CurrentUser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -29,8 +29,7 @@ public class AuthContextFilter extends OncePerRequestFilter {
     private SessionService sessionService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String auth = request.getHeader("Authorization");
         String session = request.getHeader("X-Session-Token");
         try {

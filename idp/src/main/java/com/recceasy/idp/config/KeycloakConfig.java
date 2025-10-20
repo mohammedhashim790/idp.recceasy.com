@@ -1,4 +1,3 @@
-
 package com.recceasy.idp.config;
 
 import org.keycloak.OAuth2Constants;

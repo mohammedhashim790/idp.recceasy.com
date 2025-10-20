@@ -1,10 +1,7 @@
 package com.recceasy.idp.layers.auth;
 
 import com.recceasy.idp.dto.user.CreateUser;
-import com.recceasy.idp.layers.password.PasswordRepository;
 import com.recceasy.idp.layers.password.PasswordService;
-import com.recceasy.idp.layers.user.UserRepository;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import com.recceasy.idp.layers.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

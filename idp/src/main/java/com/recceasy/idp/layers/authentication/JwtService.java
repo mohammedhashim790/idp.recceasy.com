@@ -91,7 +91,7 @@ public class JwtService {
                 sb.append('"').append(escape(e.getKey())).append('"').append(':');
                 Object v = e.getValue();
                 if (v instanceof Number || v instanceof Boolean) {
-                    sb.append(v.toString());
+                    sb.append(v);
                 } else {
                     sb.append('"').append(escape(String.valueOf(v))).append('"');
                 }
@@ -99,14 +99,15 @@ public class JwtService {
             sb.append('}');
             return sb.toString();
         }
+
         static Map<String, Object> minimalParse(String json) {
             Map<String, Object> out = new HashMap<>();
             String s = json.trim();
-            if (s.startsWith("{") && s.endsWith("}")) s = s.substring(1, s.length()-1);
+            if (s.startsWith("{") && s.endsWith("}")) s = s.substring(1, s.length() - 1);
             if (s.isBlank()) return out;
             String[] parts = s.split(",");
             for (String p : parts) {
-                String[] kv = p.split(":",2);
+                String[] kv = p.split(":", 2);
                 String key = unquote(kv[0].trim());
                 String val = kv[1].trim();
                 if (val.startsWith("\"") && val.endsWith("\"")) {
@@ -114,18 +115,23 @@ public class JwtService {
                 } else if (val.equals("true") || val.equals("false")) {
                     out.put(key, Boolean.parseBoolean(val));
                 } else {
-                    try { out.put(key, Long.parseLong(val)); }
-                    catch (Exception ex) { out.put(key, val); }
+                    try {
+                        out.put(key, Long.parseLong(val));
+                    } catch (Exception ex) {
+                        out.put(key, val);
+                    }
                 }
             }
             return out;
         }
-        private static String unquote(String s){
-            if (s.startsWith("\"") && s.endsWith("\"")) return s.substring(1, s.length()-1);
+
+        private static String unquote(String s) {
+            if (s.startsWith("\"") && s.endsWith("\"")) return s.substring(1, s.length() - 1);
             return s;
         }
-        private static String escape(String s){
-            return s.replace("\\","\\\\").replace("\"","\\\"");
+
+        private static String escape(String s) {
+            return s.replace("\\", "\\\\").replace("\"", "\\\"");
         }
     }
 }
