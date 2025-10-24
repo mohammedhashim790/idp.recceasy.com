@@ -1,8 +1,8 @@
 package com.recceasy.idp.handlers.ExceptionHandlers;
 
-public class TokenExpiredException extends Exception{
+public class TokenExpiredException extends Exception {
 
-    public TokenExpiredException(){
+    public TokenExpiredException() {
         super("Token Expired. Please try again.");
     }
 }

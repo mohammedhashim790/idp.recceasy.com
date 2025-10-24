@@ -1,8 +1,8 @@
 package com.recceasy.idp.handlers.ExceptionHandlers;
 
-public class UserExistingException extends Exception{
+public class UserExistingException extends Exception {
 
-    public UserExistingException(){
+    public UserExistingException() {
         super("User already exists");
     }
 }
