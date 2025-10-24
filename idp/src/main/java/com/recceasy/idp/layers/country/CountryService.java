@@ -22,7 +22,7 @@ public class CountryService {
     }
 
     public Country save(Country country) {
-        if(countryRepository.existsById(country.getCountryCode())) {
+        if (countryRepository.existsById(country.getCountryCode())) {
             throw new DuplicateKeyException("Country already exists");
         }
         return countryRepository.save(country);

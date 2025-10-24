@@ -6,8 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 
-import java.sql.Timestamp;
-
 @Entity
 
 public class Country {
