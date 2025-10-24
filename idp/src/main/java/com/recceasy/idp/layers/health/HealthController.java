@@ -1,6 +1,5 @@
 package com.recceasy.idp.layers.health;
 
-import com.recceasy.idp.dto.user.CreateUser;
 import com.recceasy.idp.service.KeycloakAdminService;
 import com.recceasy.idp.utils.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class HealthController {
     private KeycloakAdminService keycloakAdminService;
 
     @GetMapping
-    public String health() throws MessagingException, jakarta.mail.MessagingException, UnsupportedEncodingException {
+    public String health(){
         return "{\"status\":\"I'm healthy\"}";
     }
 
@@ -33,7 +32,6 @@ public class HealthController {
 
     @PutMapping("/put")
     public void put() throws Exception {
-        this.keycloakAdminService.createUser(new CreateUser("agathachristie025@gmail.com", "Test@123"));
     }
 
 

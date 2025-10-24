@@ -22,7 +22,7 @@ public class JwtService {
 
     public String generateToken(String username, String name, String phone, String tenantId) {
         long now = Instant.now().getEpochSecond();
-        long exp = now + ttlSeconds;
+        long exp = now + ttlSeconds;x
         Map<String, Object> payload = new HashMap<>();
         payload.put("sub", username);
         payload.put("username", username);

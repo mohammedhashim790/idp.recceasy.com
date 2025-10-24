@@ -19,6 +19,7 @@ public class EmailService {
     @Value("${from.email.address}")
     private String fromEmailAddress;
 
+    // TODO add credentials on POM.xml in production
     @Autowired
     private JavaMailSender mailSender;
 
@@ -38,9 +39,7 @@ public class EmailService {
         String subject = "Welcome to Recceasy.";
         // TODO : CHANGE TO DYNAMIC URL
         String verificationUrl = "http://localhost:8073/health/verify?token=" + token;
-        String content = format("We are happy to have you with us. " +
-                "Please verify your email address by clicking on the link below. " +
-                "\n\n <a href=\"%s\">%s</a>", verificationUrl, verificationUrl);
+        String content = format("We are happy to have you with us. " + "Please verify your email address by clicking on the link below. " + "\n\n <a href=\"%s\">%s</a>", verificationUrl, verificationUrl);
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setFrom(fromEmailAddress, "Applaud Innovations");
